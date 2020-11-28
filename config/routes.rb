@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
-  resources :reservations
-  resources :users
-  resources :workouts
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+  resources :users do
+    resources :reservations, only: [:show, :index]
+    resources :workouts, only: [:show, :index]
+  end
+
+  resources :workouts do
+    resources :reservations, only: [:show, :index]
+  end
 end
