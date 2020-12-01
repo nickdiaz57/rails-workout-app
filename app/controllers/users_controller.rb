@@ -3,6 +3,7 @@ class UsersController < ApplicationController
     end
 
     def show
+        @user = User.find_by_id(params[:id])
     end
 
     def new
@@ -10,8 +11,13 @@ class UsersController < ApplicationController
     end
 
     def create
-        @user = User.new(user_params)
-        byebug
+        user = User.new(user_params)
+        if user.save
+            redirect_to user_path(user)
+        else
+            # add an error message
+            redirect_to new_user_path
+        end
     end
 
     def edit
