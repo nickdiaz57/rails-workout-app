@@ -10,6 +10,8 @@ class UsersController < ApplicationController
     end
 
     def create
+        @user = User.new(user_params)
+        byebug
     end
 
     def edit
