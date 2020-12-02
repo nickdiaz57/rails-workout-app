@@ -6,6 +6,7 @@ class WorkoutsController < ApplicationController
     end
 
     def new
+        @workout = Workout.new
     end
 
     def create
@@ -18,6 +19,12 @@ class WorkoutsController < ApplicationController
     end
 
     def destroy
+    end
+
+    private
+
+    def workout_params
+        params.require(:workout).permit(:content, :date)
     end
 end
 

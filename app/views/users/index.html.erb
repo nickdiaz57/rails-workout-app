@@ -1,3 +1,6 @@
-<h1>Our Members</h1>
+<h1>Our Members</h1><br><br>
 
 <!-- list and link to all members -->
+<% @users.each do |u| %>
+    <%= link_to u.name, user_path(u) %><br><br>
+<% end %>

@@ -1,3 +1,13 @@
 <h2>Edit Your Profile</h2>
 
 <!-- form to edit user information -->
+
+<%= form_for(@user) do |f| %>
+    Username: <%= f.text_field :name %>
+    Email: <%= f.text_field :email %>
+    Password: <%= f.password_field :password %>
+    Password Confirmation: <%= f.password_field :password_confirmation %>
+    <%= f.submit "Submit" %>
+  <% end %>
+
+<%= button_to "Delete Profile", 'users#destroy' %>

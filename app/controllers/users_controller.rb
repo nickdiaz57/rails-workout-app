@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
+    #add before action for login check
+
     def index
+        @users = User.all
     end
 
     def show
@@ -21,12 +24,25 @@ class UsersController < ApplicationController
     end
 
     def edit
+        @user = User.find_by_id(params[:id])
     end
 
     def update
+        # add confirmation for password change
+        # add partial for new and edit forms
+        @user = User.find_by_id(params[:id])
+        if @user.update(user_params)
+            redirect_to user_path(@user)
+        else
+            # add error message
+            render :edit
+        end
     end
 
     def destroy
+        # add confirmation of profile delete
+        @user.destroy
+        redirect_to '/'
     end
 
     private
