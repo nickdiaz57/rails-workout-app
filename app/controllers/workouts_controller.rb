@@ -1,8 +1,10 @@
 class WorkoutsController < ApplicationController
     def index
+        @workouts = Workout.all
     end
 
     def show
+        @workout = Workout.find_by_id(params[:id])
     end
 
     def new

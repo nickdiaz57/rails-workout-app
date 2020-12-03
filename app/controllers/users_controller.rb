@@ -6,7 +6,7 @@ class UsersController < ApplicationController
     end
 
     def show
-        @user = User.find_by_id(params[:id])
+        @user = current_user
     end
 
     def new
@@ -24,13 +24,13 @@ class UsersController < ApplicationController
     end
 
     def edit
-        @user = User.find_by_id(params[:id])
+        @user = current_user
     end
 
     def update
         # add confirmation for password change
         # add partial for new and edit forms
-        @user = User.find_by_id(params[:id])
+        @user = current_user
         if @user.update(user_params)
             redirect_to user_path(@user)
         else
@@ -40,8 +40,8 @@ class UsersController < ApplicationController
     end
 
     def destroy
-        # add confirmation of profile delete
-        @user.destroy
+        user = current_user
+        user.destroy
         redirect_to '/'
     end
 
@@ -49,6 +49,10 @@ class UsersController < ApplicationController
 
     def user_params
         params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    end
+
+    def current_user
+        User.find_by_id(params[:id])
     end
 end
 
