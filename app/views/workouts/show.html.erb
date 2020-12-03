@@ -1,3 +1,14 @@
-<h2>Class Time</h2>
+<h2>Workout - <%= @workout.format_date_time %></h2>
 
-<!-- shows class content, time, and all users signed up for class -->
+<!-- shows workout content, time, and all users signed up for class -->
+
+<h3><%= @workout.name %></h3>
+<p><%= @workout.content %></p>
+
+<ul>
+<% @workout.users.each do |u| %>
+    <li><%= link_to u.name, user_path(u) %></li><br>
+<% end %>
+</ul>
+
+<%= link_to "Edit Workout", edit_workout_path(@workout) %>
