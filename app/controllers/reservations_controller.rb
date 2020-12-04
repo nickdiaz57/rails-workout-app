@@ -6,6 +6,40 @@ class ReservationsController < ApplicationController
 
     def show
         @reservation = Reservation.find_by_id(params[:id])
+        @users = @reservation.workout.users
+    end
+
+    def new
+        if params[:user_id] && !User.exists?(params[:user_id])
+            redirect_to users_path, alert: "User not found."
+          else
+            @reservation = Reservation.new(user_id: params[:user_id])
+            @workouts = Workout.all.select {|w| w.date.to_date.future?}
+        end
+    end
+
+    def create
+        # byebug
+        @reservation = Reservation.new(reservation_params)
+        if @reservation.save
+            redirect_to user_reservations_path(@reservation.user)
+        else
+            render :new # add error message
+        end
+    end
+
+    def edit
+
+    end
+
+    def update
+
+    end
+
+    private
+
+    def reservation_params
+        params.require(:reservation).permit(:score, :user_id, :workout_id)
     end
 end
 

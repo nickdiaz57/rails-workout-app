@@ -1,0 +1,7 @@
+<h2>Make a Reservation</h2>
+
+<%= form_for(@reservation) do |f| %>
+    <%= f.hidden_field :user_id %>
+    <%= f.collection_select :workout_id, @workouts, :id, :format_date_time %>
+    <%= f.submit %>
+<% end %>

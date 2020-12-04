@@ -5,5 +5,6 @@
 <ul>
 <% @reservations.each do |r| %>
     <li><%= link_to r.workout.format_name, workout_path(r.workout) %></li>
+    <!-- add link to change this reservation -->
 <% end %>
 </ul>

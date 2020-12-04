@@ -6,12 +6,13 @@
 <ul>
 <%= @user.workouts.each do |w| %>
     <li><%= w.title %> - <%= w.format_date %>
-        # <ul>
+        <!-- # <ul>
         # <li>Score:  </li> retrieve score from reservations
-        # </ul>
+        # </ul> -->
     </li>
 <% end %>
 </ul>
 
-<%= link_to "Edit Profile", edit_user_path(@user) %>
-<%= button_to "Log Out", logout_path %> #move to page header
+<%= link_to "Reserve a Workout", new_user_reservation_path(@user) %><br>
+<%= link_to "Edit Profile", edit_user_path(@user) %><br>
+<%= button_to "Log Out", logout_path %> <!-- move to page header -->
