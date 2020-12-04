@@ -11,7 +11,7 @@ class ReservationsController < ApplicationController
 
     def new
         if params[:user_id] && !User.exists?(params[:user_id])
-            redirect_to users_path, alert: "User not found."
+            redirect_to "/", alert: "User not found."
           else
             @reservation = Reservation.new(user_id: params[:user_id])
             @workouts = Workout.all.select {|w| w.date.to_date.future?}
@@ -19,7 +19,6 @@ class ReservationsController < ApplicationController
     end
 
     def create
-        # byebug
         @reservation = Reservation.new(reservation_params)
         if @reservation.save
             redirect_to user_reservations_path(@reservation.user)
@@ -29,11 +28,37 @@ class ReservationsController < ApplicationController
     end
 
     def edit
-
+        if params[:user_id]
+            user = User.find_by_id(params[:user_id])
+            if user.nil?
+                redirect_to "/", alert: "User not found."
+            else
+                @reservation = user.reservations.find_by_id(params[:id])
+                @workouts = Workout.all.select {|w| w.date.to_date.future?}
+                redirect_to to user_reservations_path(user), alert: "Reservation not found." if @reservation.nil?
+            end
+        else
+            @reservation = Reservation.find_by_id(params[:id])
+        end
     end
 
     def update
+        @reservation = Reservation.find_by_id(params[:id])
+        @reservation.update(reservation_params)
 
+        if @reservation.save
+            redirect_to user_reservations_path(@reservation.user)
+        else
+            render :edit
+        end
+    end
+
+    def destroy
+        byebug
+        reservation = Reservation.find_by_id(params[:id])
+        user = reservation.user
+        reservation.destroy
+        redirect_to user_reservations_path(user)
     end
 
     private

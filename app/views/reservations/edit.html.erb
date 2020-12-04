@@ -1,1 +1,8 @@
 <h2>Edit Your Reservation</h2>
+
+<%= form_for(@reservation) do |f| %>
+    <%= f.hidden_field :user_id %>
+    <%= f.text_area :score %>
+    <%= f.collection_select :workout_id, @workouts, :id, :format_date_time %>
+    <%= f.submit %>
+<% end %>
