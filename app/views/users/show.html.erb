@@ -2,5 +2,16 @@
 
 <!-- individual users profile page, shows past workouts completed with scores -->
 
+<h3>Your Workouts</h3>
+<ul>
+<%= @user.workouts.each do |w| %>
+    <li><%= w.title %> - <%= w.format_date %>
+        # <ul>
+        # <li>Score:  </li> retrieve score from reservations
+        # </ul>
+    </li>
+<% end %>
+</ul>
+
 <%= link_to "Edit Profile", edit_user_path(@user) %>
-<%= button_to "Log Out", logout_path %>
+<%= button_to "Log Out", logout_path %> #move to page header

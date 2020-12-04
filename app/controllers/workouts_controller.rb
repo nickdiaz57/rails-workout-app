@@ -4,6 +4,7 @@ class WorkoutsController < ApplicationController
     end
 
     def show
+        # byebug
         @workout = current_workout
     end
 
@@ -12,7 +13,7 @@ class WorkoutsController < ApplicationController
     end
 
     def create
-        byebug
+        # byebug
         # change to allow assigning to a user on creation
         workout = Workout.new(workout_params)
         if workout.save

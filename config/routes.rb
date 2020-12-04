@@ -13,4 +13,5 @@ Rails.application.routes.draw do
   resources :workouts do
     resources :reservations, only: [:show, :index]
   end
+  #namespace routes, admins can add, edit, or delete workouts
 end

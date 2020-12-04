@@ -1,8 +1,11 @@
 class ReservationsController < ApplicationController
     def index
+        @reservations = User.find_by_id(params[:user_id]).reservations.select {|r| r.workout.date.to_date.future?}
+        # byebug
     end
 
     def show
+        @reservation = Reservation.find_by_id(params[:id])
     end
 end
 
