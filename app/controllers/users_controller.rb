@@ -50,7 +50,7 @@ class UsersController < ApplicationController
     private
 
     def user_params
-        params.require(:user).permit(:name, :email, :password, :password_confirmation)
+        params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
     end
 
     def current_user
@@ -58,6 +58,7 @@ class UsersController < ApplicationController
     end
 
     def login_check
+        # if you log in as anyone you can access all other user pages, fix this
         redirect_to '/' unless session[:user_id]
     end
 end

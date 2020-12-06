@@ -1,6 +1,7 @@
 <h1>Our Members</h1><br><br>
 
-<!-- list and link to all members -->
+<!-- list all members
+remove the link to each page, add some stats about each user, like number of workouts completed -->
 <% @users.each do |u| %>
     <%= link_to u.name, user_path(u) %><br><br>
 <% end %>

@@ -1,11 +1,13 @@
 class WorkoutsController < ApplicationController
+    before_action :current_workout, except: [:index, :new, :create]
+
     def index
         @workouts = Workout.all
     end
 
     def show
         # byebug
-        @workout = current_workout
+        # @workout = current_workout
     end
 
     def new
@@ -20,17 +22,17 @@ class WorkoutsController < ApplicationController
             redirect_to workout_path(workout)
         else
             # add an error message
-            redirect_to new_workout_path
+            render :new
         end
     end
 
     def edit
-        @workout = current_workout
+        # @workout = current_workout
     end
 
     def update
         # add partial for new and edit forms
-        @workout = current_workout
+        # @workout = current_workout
         if @workout.update(workout_params)
             redirect_to workout_path(@workout)
         else
@@ -40,8 +42,8 @@ class WorkoutsController < ApplicationController
     end
 
     def destroy
-        workout = current_workout
-        workout.destroy
+        # workout = current_workout
+        @workout.destroy
         redirect_to workouts_path
     end
 
@@ -52,7 +54,7 @@ class WorkoutsController < ApplicationController
     end
 
     def current_workout
-        Workout.find_by_id(params[:id])
+        @workout = Workout.find_by_id(params[:id])
     end
 
 end
