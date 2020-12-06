@@ -4,11 +4,10 @@
 
 <h3>Your Workouts</h3>
 <ul>
-<%= @user.workouts.each do |w| %>
+<% @user.workouts.each do |w| %>
     <li><%= w.title %> - <%= w.format_date %>
-        <!-- # <ul>
-        # <li>Score:  </li> retrieve score from reservations
-        # </ul> -->
+        <!--retrieve score from reservations if score is present
+        if not present and workout already happened, display a message with a link to add a score -->
     </li>
 <% end %>
 </ul>

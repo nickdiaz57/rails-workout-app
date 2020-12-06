@@ -1,12 +1,14 @@
 class UsersController < ApplicationController
     #add before action for login check
+    before_action :login_check, except: [:index, :new, :create, :welcome]
+    before_action :current_user, except: [:index, :new, :create, :welcome]
 
     def index
         @users = User.all
     end
 
     def show
-        @user = current_user
+        # @user = current_user
     end
 
     def new
@@ -19,18 +21,18 @@ class UsersController < ApplicationController
             redirect_to user_path(user)
         else
             # add an error message
-            redirect_to new_user_path
+            render :new
         end
     end
 
     def edit
-        @user = current_user
+        # @user = current_user
     end
 
     def update
         # add confirmation for password change
         # add partial for new and edit forms
-        @user = current_user
+        # @user = current_user
         if @user.update(user_params)
             redirect_to user_path(@user)
         else
@@ -40,8 +42,8 @@ class UsersController < ApplicationController
     end
 
     def destroy
-        user = current_user
-        user.destroy
+        # user = current_user
+        @user.destroy
         redirect_to '/'
     end
 
@@ -52,7 +54,11 @@ class UsersController < ApplicationController
     end
 
     def current_user
-        User.find_by_id(params[:id])
+        @user = User.find_by_id(params[:id])
+    end
+
+    def login_check
+        redirect_to '/' unless session[:user_id]
     end
 end
 
