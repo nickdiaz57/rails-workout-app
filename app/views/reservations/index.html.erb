@@ -1,11 +1,9 @@
 <h2>Your Workout History</h2>
 
-<!-- list all of the users past reservations -->
-
 <ul>
 <% @reservations.each do |r| %>
     <li>
-    <%= link_to r.workout.format_name, workout_path(r.workout) %>
+    <%= link_to r.workout.format_name, user_workout_path(r.user, r.workout) %>
         <ul>
         <li>
         <%= r.score || link_to("Add a Score!", edit_user_reservation_path(@user, r)) %>

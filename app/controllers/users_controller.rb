@@ -21,7 +21,7 @@ class UsersController < ApplicationController
             flash[:success] = "User successfully created!"
             redirect_to user_path(@user)
         else
-            flash[:alert] = "Please try again."
+            flash[:alert] = "There was an error signing you up. Please try again."
             flash[:errors] = @user.errors.full_messages
             render :new
         end
@@ -29,15 +29,17 @@ class UsersController < ApplicationController
 
     def update
         if @user.update(user_params)
+            flash[:success] = "User successfully updated!"
             redirect_to user_path(@user)
         else
-            # add error message
+            flash[:alert] = "There was an error updating your profile. Please try again."
             render :edit
         end
     end
 
     def destroy
-        # flash message
+        flash[:success] = "Account deleted."
+        session.delete :user_id
         @user.destroy
         redirect_to '/'
     end
@@ -56,12 +58,3 @@ class UsersController < ApplicationController
         redirect_to '/' unless session[:user_id]
     end
 end
-
-# create_table "users", force: :cascade do |t|
-#     t.string "first_name"
-#     t.string "email"
-#     t.datetime "created_at", precision: 6, null: false
-#     t.datetime "updated_at", precision: 6, null: false
-#     t.string "password_digest"
-#     t.string "last_name"
-#   end

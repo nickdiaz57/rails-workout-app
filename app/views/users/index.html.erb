@@ -1,7 +1,12 @@
 <h1>Our Members</h1><br><br>
 
-<!-- list all members
-remove the link to each page, add some stats about each user, like number of workouts completed -->
+<ul>
 <% @users.each do |u| %>
-    <%= link_to u.name, user_path(u) %><br><br>
+    <li>
+    <%= u.name %>
+        <ul>
+        <li>
+        Workouts Completed: <%= Reservation.past_reservations(u.id).count %>
+        </li>
+    </li><br><br>
 <% end %>

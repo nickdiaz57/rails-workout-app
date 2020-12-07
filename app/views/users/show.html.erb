@@ -4,13 +4,11 @@
     <h1>Welcome.</h1>
 <% end %>
 
-<!-- individual users profile page, shows upcoming workouts -->
-
 <h3>Your Upcoming Workouts</h3>
 <ul>
 <% @reservations.each do |r| %>
     <li>
-    <%= r.workout.title %> - <%= r.workout.format_date %><br>
+    <%= link_to r.workout.title, user_workout_path(@user, r.workout) %> - <%= r.workout.format_date %><br>
     <%= link_to "Change Reservation", edit_user_reservation_path(r.user, r) %><br>
     <%= link_to 'Cancel Reservation', r, method: :delete, data: { confirm: 'Cancel your reservation?' } %><br><br>
     </li>

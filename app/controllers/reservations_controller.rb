@@ -28,6 +28,7 @@ class ReservationsController < ApplicationController
     end
 
     def edit # fix dropdown list when editing a workout in the past
+        byebug
         if params[:user_id]
             user = User.find_by_id(params[:user_id])
             if user.nil?
