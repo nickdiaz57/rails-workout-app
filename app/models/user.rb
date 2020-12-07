@@ -6,6 +6,8 @@ class User < ApplicationRecord
     validates :email, presence: true, uniqueness: true
     validates :password_digest, presence: true
 
+    # scope :order_workouts, ~> {}
+
     def name
         "#{self.first_name} #{self.last_name}"
     end

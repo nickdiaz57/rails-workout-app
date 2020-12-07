@@ -4,19 +4,26 @@
     <h1>Welcome.</h1>
 <% end %>
 
-<!-- individual users profile page, shows past workouts completed with scores -->
+<!-- individual users profile page, shows upcoming workouts -->
 
 <h3>Your Workout History</h3>
 <ul>
 <% @user.past_workouts.each do |w| %>
-
+    <% reservation = w.reservations.find_by(user_id: @user.id) %>
+    <li><%= w.title %> - <%= w.format_date %>
+        <ul>
+        <li>
+        <%= reservation.score || link_to("Add a Score!", edit_user_reservation_path(@user, reservation)) %>
+        </li>
+        </ul>
+    </li>
+<% end %>
+</ul>
         <!--retrieve score from reservations if score is present
         if not present and workout already happened, display a message with a link to add a score
             add link to each workout page -->
-<% end %>
-</ul>
 
-<%= link_to "Your Reservations", user_reservations_path(@user) %><br>
+<%= link_to "Your Reservations", user_reservations_path(@user) %><br> <!-- change to past reservations -->
 <%= link_to "Reserve a Workout", new_user_reservation_path(@user) %><br><br>
 <%= link_to "Edit Profile", edit_user_path(@user) %><br>
-<%= button_to "Log Out", logout_path %> <!-- move to page header -->
+<!-- <%= button_to "Log Out", logout_path %> move to page header -->

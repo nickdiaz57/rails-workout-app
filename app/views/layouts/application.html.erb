@@ -13,13 +13,22 @@
   <!-- partial/nav bar/logout button -->
   <!-- success/error messages
   if alert or success is present in flash hash, present them here -->
-    
+
     <% if flash[:alert] %>
       <%= flash[:alert] %>
+      <% flash[:errors].each do |e| %>
+        <p><%= e %></p>
+      <% end %>
     <% elsif flash[:success] %>
       <%= flash[:success] %>
     <% end %>
 
     <%= yield %>
+
+    <% if User.find_by_id(session[:user_id]) %>
+      <% @user = User.find_by_id(session[:user_id]) %>
+      <br><br><%= link_to "Return to Home Page", user_path(@user) %><br>
+      <%= button_to "Log Out", logout_path %>
+    <% end %>
   </body>
 </html>

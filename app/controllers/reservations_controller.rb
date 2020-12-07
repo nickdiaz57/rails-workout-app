@@ -1,15 +1,16 @@
 class ReservationsController < ApplicationController
     def index
-        @user = User.find_by_id(params[:user_id])
-        @reservations = @user.reservations.select {|r| r.workout.date.to_date.future?}
         # byebug
+        # change to past reservations
+        @user = User.find_by_id(params[:user_id])
+        @reservations = Reservation.past_reservations(@user.id) #@user.reservations.select {|r| r.workout.date.to_date.future?}
     end
-
+    
     def show
         @reservation = Reservation.find_by_id(params[:id])
         @users = @reservation.workout.users
     end
-
+    
     def new
         if params[:user_id] && !User.exists?(params[:user_id])
             redirect_to "/", alert: "User not found."
