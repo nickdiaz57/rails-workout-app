@@ -1,9 +1,7 @@
 class ReservationsController < ApplicationController
     def index
-        # byebug
-        # change to past reservations
         @user = User.find_by_id(params[:user_id])
-        @reservations = Reservation.past_reservations(@user.id) #@user.reservations.select {|r| r.workout.date.to_date.future?}
+        @reservations = Reservation.past_reservations(@user.id)
     end
     
     def show
@@ -29,7 +27,7 @@ class ReservationsController < ApplicationController
         end
     end
 
-    def edit
+    def edit # fix dropdown list when editing a workout in the past
         if params[:user_id]
             user = User.find_by_id(params[:user_id])
             if user.nil?

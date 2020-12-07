@@ -7,8 +7,7 @@ class UsersController < ApplicationController
     end
 
     def show
-        # byebug
-        # change to future reservations
+        @reservations = Reservation.future_reservations(@user.id)
     end
 
     def new
@@ -16,14 +15,12 @@ class UsersController < ApplicationController
     end
 
     def create
-        # byebug
         @user = User.new(user_params)
         if @user.save
             session[:user_id] = @user.id
             flash[:success] = "User successfully created!"
             redirect_to user_path(@user)
         else
-            # byebug
             flash[:alert] = "Please try again."
             flash[:errors] = @user.errors.full_messages
             render :new
@@ -31,7 +28,6 @@ class UsersController < ApplicationController
     end
 
     def update
-        # add confirmation for password change
         if @user.update(user_params)
             redirect_to user_path(@user)
         else
