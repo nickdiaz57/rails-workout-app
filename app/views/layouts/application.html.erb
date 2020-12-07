@@ -10,6 +10,16 @@
   </head>
 
   <body>
+  <!-- partial/nav bar/logout button -->
+  <!-- success/error messages
+  if alert or success is present in flash hash, present them here -->
+    
+    <% if flash[:alert] %>
+      <%= flash[:alert] %>
+    <% elsif flash[:success] %>
+      <%= flash[:success] %>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>

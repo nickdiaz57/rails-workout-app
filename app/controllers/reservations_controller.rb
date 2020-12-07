@@ -1,6 +1,7 @@
 class ReservationsController < ApplicationController
     def index
-        @reservations = User.find_by_id(params[:user_id]).reservations.select {|r| r.workout.date.to_date.future?}
+        @user = User.find_by_id(params[:user_id])
+        @reservations = @user.reservations.select {|r| r.workout.date.to_date.future?}
         # byebug
     end
 
@@ -38,7 +39,7 @@ class ReservationsController < ApplicationController
                 redirect_to to user_reservations_path(user), alert: "Reservation not found." if @reservation.nil?
             end
         else
-            @reservation = Reservation.find_by_id(params[:id])
+            redirect_to "/", alert: "User not found."
         end
     end
 
@@ -54,7 +55,7 @@ class ReservationsController < ApplicationController
     end
 
     def destroy
-        byebug
+        # byebug
         reservation = Reservation.find_by_id(params[:id])
         user = reservation.user
         reservation.destroy

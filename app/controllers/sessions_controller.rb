@@ -1,8 +1,8 @@
 class SessionsController < ApplicationController
 
     def create
-        # add error handling for trying to log in a user that doesnt exist 
-        user = User.find_by(name: params[:user][:name])
+        # add better error handling for trying to log in a user that doesnt exist 
+        user = User.find_by(email: params[:user][:email])
         return head(:forbidden) unless user.authenticate(params[:user][:password])
         session[:user_id] = user.id
         redirect_to user_path(user)

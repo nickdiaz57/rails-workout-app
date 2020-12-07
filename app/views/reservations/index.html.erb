@@ -5,10 +5,12 @@
 <ul>
 <% @reservations.each do |r| %>
     <li>
-    <%= link_to r.workout.format_name, workout_path(r.workout) %><br>      <!-- does not display score, fix this -->
+    <%= link_to r.workout.format_name, workout_path(r.workout) %><br>
     <%= link_to "Change Reservation", edit_user_reservation_path(r.user, r) %><br>
     <%= link_to 'Cancel Reservation', r, method: :delete, data: { confirm: 'Cancel your reservation?' } %>
     </li>
     <br>
 <% end %>
 </ul>
+
+<%= link_to "Return to Home Page", user_path(@user) %>

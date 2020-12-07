@@ -1,17 +1,22 @@
-<h1>Welcome, <%= @user.first_name %>.</h1>
+<% if @user.first_name %>
+    <h1>Welcome, <%= @user.first_name %>.</h1>
+<% else %>
+    <h1>Welcome.</h1>
+<% end %>
 
 <!-- individual users profile page, shows past workouts completed with scores -->
 
-<h3>Your Workouts</h3>
+<h3>Your Workout History</h3>
 <ul>
-<% @user.workouts.each do |w| %>
-    <li><%= w.title %> - <%= w.format_date %>
+<% @user.past_workouts.each do |w| %>
+
         <!--retrieve score from reservations if score is present
-        if not present and workout already happened, display a message with a link to add a score -->
-    </li>
+        if not present and workout already happened, display a message with a link to add a score
+            add link to each workout page -->
 <% end %>
 </ul>
 
-<%= link_to "Reserve a Workout", new_user_reservation_path(@user) %><br>
+<%= link_to "Your Reservations", user_reservations_path(@user) %><br>
+<%= link_to "Reserve a Workout", new_user_reservation_path(@user) %><br><br>
 <%= link_to "Edit Profile", edit_user_path(@user) %><br>
 <%= button_to "Log Out", logout_path %> <!-- move to page header -->

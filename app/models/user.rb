@@ -9,4 +9,12 @@ class User < ApplicationRecord
     def name
         "#{self.first_name} #{self.last_name}"
     end
+
+    def past_workouts
+        self.workouts.select {|w| w.date.to_date.past?}
+    end
+
+    def future_workouts
+        self.workouts.select {|w| w.date.to_date.future?}
+    end
 end
