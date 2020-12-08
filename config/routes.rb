@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   post '/logout' => 'sessions#destroy'
 
   resources :users do
-    resources :reservations, only: [:show, :index, :new, :edit]
+    resources :reservations, only: [:index, :new, :edit]
     resources :workouts, only: [:show, :index, :new, :edit]
   end
 

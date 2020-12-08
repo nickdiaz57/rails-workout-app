@@ -4,11 +4,6 @@ class ReservationsController < ApplicationController
         @reservations = Reservation.past_reservations(@user.id)
     end
     
-    def show
-        @reservation = Reservation.find_by_id(params[:id])
-        @users = @reservation.workout.users
-    end
-    
     def new
         if params[:user_id] && !User.exists?(params[:user_id])
             redirect_to "/", alert: "User not found."

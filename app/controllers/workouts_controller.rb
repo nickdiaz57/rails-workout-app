@@ -4,10 +4,7 @@ class WorkoutsController < ApplicationController
     def index
         @workouts = Workout.all
     end
-
-    def show
-    end
-
+    
     def new
         @workout = Workout.new
     end
@@ -22,9 +19,6 @@ class WorkoutsController < ApplicationController
             flash[:alert] = "There was an error creating the workout. Please try again."
             render :new
         end
-    end
-
-    def edit
     end
 
     def update
