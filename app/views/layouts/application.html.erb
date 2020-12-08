@@ -10,15 +10,15 @@
   </head>
 
   <body>
-
-    <% if flash[:alert] %>
-      <%= flash[:alert] %>
-      <% flash[:errors].each do |e| %>
-        <p><%= e %></p>
-      <% end %>
-    <% elsif flash[:success] %>
-      <%= flash[:success] %>
+  <% if flash[:alert] %>
+    <%= flash[:alert] %>
+    <% flash[:errors]&.each do |e| %>
+    <p><%= e %></p>
     <% end %>
+  <% elsif flash[:success] %>
+    <%= flash[:success] %>
+  <% end %>   <!-- fix this -->
+ 
 
     <%= yield %>
     

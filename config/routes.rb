@@ -12,4 +12,6 @@ Rails.application.routes.draw do
 
   resources :workouts
   resources :reservations
+
+  get '/auth/google_oauth2/callback', to: "sessions#google_login"
 end
