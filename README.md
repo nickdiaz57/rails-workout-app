@@ -1,24 +1,26 @@
-# README
+# Rails Workout Tracker App
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Simple Rails application that can create, update, and display workouts for a particular user, as well as allow users to see what workouts other users will be participating in.
 
-Things you may want to cover:
+## Installation
 
-* Ruby version
+First, fork and clone the repository.
+```https://github.com/nickdiaz57/rails-workout-app.git```
 
-* System dependencies
+### Set up Rails app
 
-* Configuration
+Next, install the gems required by the application:
 
-* Database creation
+    bundle install
 
-* Database initialization
+Next, execute the database migrations/schema setup:
 
-* How to run the test suite
+	bundle exec rake db:setup
 
-* Services (job queues, cache servers, search engines, etc.)
+### Start the app
 
-* Deployment instructions
+Start the Rails app to see the Rails Workout Tracker application.
 
-* ...
+    bundle exec rails server
+
+You can find the app now by pointing your browser to [http://localhost:3000](http://localhost:3000). If everything worked you can log into the Rails Workout tracker through Google, or by creating an account directly in the application.
