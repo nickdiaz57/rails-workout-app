@@ -1,3 +1,14 @@
 <h1>All Available Classes</h1>
 
 <!-- list of all workouts and class times, with links to sign up for a class or post a workout -->
+<ul>
+<% @workouts.each do |w| %>
+    <li>
+    <%= link_to w.format_name, workout_path(w) %>
+        <ul>
+        <li><%= link_to "Reserve This Workout", reservations_path(:reservation => {:user_id => session[:user_id], :workout_id => w.id}), method: "post" %>
+        </li>
+        </ul>
+    </li><br><br>
+<% end %>
+</ul>

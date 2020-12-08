@@ -1,12 +1,5 @@
 <h2>Edit Workout</h2>
 
-<!-- form to edit workout, should be able to see user reservation if present and update score -->
-
-<%= form_for(@workout) do |f| %>
-    Title: <%= f.text_field :title %><br>
-    Content: <%= f.text_area :content %><br>
-    <%= f.datetime_select :date %>
-    <%= f.submit "Submit" %>
-  <% end %>
+<%= render 'workouts_form' %>
 
 <%= link_to 'Delete Workout', @workout, method: :delete, data: { confirm: 'Delete this workout?' } %>

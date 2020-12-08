@@ -19,6 +19,7 @@ class ReservationsController < ApplicationController
     end
 
     def create
+        # byebug
         @reservation = Reservation.new(reservation_params)
         if @reservation.save
             flash[:alert] = "Reservation successfully created!"
@@ -61,7 +62,7 @@ class ReservationsController < ApplicationController
         reservation = Reservation.find_by_id(params[:id])
         user = reservation.user
         reservation.destroy
-        redirect_to user_reservations_path(user)
+        redirect_to user_path(user)
     end
 
     private

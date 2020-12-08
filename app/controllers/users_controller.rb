@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-    before_action :login_check, except: [:index, :new, :create, :welcome]
-    before_action :current_user, except: [:index, :new, :create, :welcome]
+    before_action :login_check, except: [:index, :new, :create]
+    before_action :current_user, except: [:index, :new, :create]
 
     def index
         @users = User.all

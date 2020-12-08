@@ -1,13 +1,3 @@
 <h1>Post a Workout</h1>
 
-<!-- form to post a new workout to a user profile 
-should have a way to differentiate between open gym workouts made by users and class workouts -->
-
-<%= form_for :workout, url: '/workouts' do |f| %>
-    Title: <%= f.text_field :title %><br>
-    Content: <%= f.text_area :content %><br>
-    <%= f.datetime_select :date %>
-    <%= f.submit "Submit" %>
-  <% end %>
-
-  <!-- clean up date/time input -->
+<%= render 'workouts_form' %>

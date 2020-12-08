@@ -13,12 +13,13 @@ class WorkoutsController < ApplicationController
     end
 
     def create
-        # change to allow assigning to a user on creation
         workout = Workout.new(workout_params)
         if workout.save
+            flash[:alert] = "Workout successfully created!"
+            workout.users << User.find_by_id(session[:user_id])
             redirect_to workout_path(workout)
         else
-            # add an error message
+            flash[:alert] = "There was an error creating the workout. Please try again."
             render :new
         end
     end
@@ -27,11 +28,11 @@ class WorkoutsController < ApplicationController
     end
 
     def update
-        # add partial for new and edit forms
         if @workout.update(workout_params)
+            flash[:alert] = "Workout successfully updated!"
             redirect_to workout_path(@workout)
         else
-            # add error message
+            flash[:alert] = "There was an error editing the workout. Please try again."
             render :edit
         end
     end
@@ -44,7 +45,7 @@ class WorkoutsController < ApplicationController
     private
 
     def workout_params
-        params.require(:workout).permit(:title, :content, :date)
+        params.require(:workout).permit(:title, :content, :date, :user_id)
     end
 
     def current_workout
