@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     end
 
     def show
-        @reservations = Reservation.future_reservations(@user.id)
+        @reservations = Reservation.future_reservations(@user.id) #order this by date, sooner to later
     end
 
     def new

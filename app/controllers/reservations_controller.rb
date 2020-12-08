@@ -25,12 +25,11 @@ class ReservationsController < ApplicationController
             redirect_to user_path(@reservation.user)
         else
             flash[:alert] = "An error occurred. Please try again."
-            render :new # add error message
+            render :new
         end
     end
  
     def edit
-        # byebug
         if params[:user_id]
             user = User.find_by_id(params[:user_id])
             if user.nil?
@@ -59,7 +58,6 @@ class ReservationsController < ApplicationController
     end
 
     def destroy
-        # byebug
         reservation = Reservation.find_by_id(params[:id])
         user = reservation.user
         reservation.destroy

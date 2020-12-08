@@ -1,11 +1,20 @@
 class SessionsController < ApplicationController
 
     def create
-        # add better error handling for trying to log in a user that doesnt exist 
         user = User.find_by(email: params[:user][:email])
-        return head(:forbidden) unless user.authenticate(params[:user][:password])
-        session[:user_id] = user.id
-        redirect_to user_path(user)
+        if user
+            if user.authenticate(params[:user][:password])
+                flash[:alert] = "Success!"
+                session[:user_id] = user.id
+                redirect_to user_path(user)
+            else
+                flash[:alert] = "Incorrect password. Please try again."
+                render :new
+            end
+        else
+            flash[:alert] = "We could not find your account. Please check your information, or create an account."
+            redirect_to '/'
+        end
     end
 
     def destroy
